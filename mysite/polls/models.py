@@ -2,6 +2,7 @@ from datetime import datetime
 import datetime
 from django.utils import timezone
 from django.db import models
+from django.contrib import admin
 # Create your models here.
 
 
@@ -13,7 +14,12 @@ class Question(models.Model):
         return self.question_text
 
     def was_published_recently(self):
-        return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
+        now = timezone.now()
+        return now - datetime.timedelta(days=1) <= self.pub_date <= now
+
+    was_published_recently.boolean = True
+    # was_published_recently.ordering = 'pub_date'
+    # was_published_recently.description = 'Published Recently?'
 
 
 class Choice(models.Model):

@@ -1,0 +1,5 @@
+
+{% block branding %}
+    {{ site_header|default:_('Django administration') }}
+    <h1 id="site-name"><a href="{% url 'admin:index' %}">Go to Polls Administration</a></h1>
+{% endblock %}
